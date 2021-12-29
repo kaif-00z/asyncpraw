@@ -1,5 +1,5 @@
 """asyncpraw setup.py"""
-
+import os
 import re
 from codecs import open
 from os import path
@@ -30,7 +30,9 @@ extras = {
         "pytest-asyncio",
         "pytest-vcr",
         "testfixtures >4.13.2, <7",
-        "vcrpy==4.1.1",
+        "vcrpy >=4.1.1"
+        if os.getenv("PYPI_UPLOAD", False)
+        else "vcrpy @ https://github.com/LilSpazJoekp/vcrpy/archive/asyncpraw.zip",
     ],
 }
 extras["dev"] += extras["lint"] + extras["test"]
